@@ -1,0 +1,19 @@
+/* pages/bindSchoolInfo/bindSchoolInfo.wxss */
+.head {
+  color: black;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.inputType{
+  border: 1px solid black;
+  margin-bottom: 30px;
+  font-size: 12px;
+}
+
+.preInputText{
+  display: flex;
+}

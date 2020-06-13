@@ -1,5 +1,7 @@
 {
   "pages":[
+    "pages/loginIndex/loginIndex",
+    "pages/bindSchoolInfo/bindSchoolInfo",
     "pages/index/index",
     "pages/logs/logs"
   ],

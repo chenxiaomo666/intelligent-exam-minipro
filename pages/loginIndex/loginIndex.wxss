@@ -1,0 +1,16 @@
+/* pages/loginIndex/loginIndex.wxss */
+.head {
+  color: black;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.teacher{
+  margin-top: 100px;
+}
+
+.student {
+  margin-top: 100px;
+}
