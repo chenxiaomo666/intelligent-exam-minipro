@@ -1,0 +1,12 @@
+<!--pages/examIndex/examIndex.wxml-->
+<view class="head">欢迎{{ name }}同学</view>
+
+<view decode class="textType"><rich-text>一些题目说明:balabalabalabala</rich-text></view>
+<block wx:if="{{examNumber==null}}">
+  <view decode class="textType"><rich-text>请点击下方的抽取试卷按钮，并约两秒后进入考试</rich-text></view>
+</block>
+<block wx:else>
+  <view decode class="textType"><rich-text>您抽取的试卷编号为{{examNumber}}，一共有{{subjectNumber}}道题目，两秒后进入考试</rich-text></view>
+</block>
+
+<button style="margin-top:30px;" bindtap="startExam">抽取试卷</button>

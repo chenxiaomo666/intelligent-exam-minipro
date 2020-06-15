@@ -25,7 +25,7 @@ Page({
       success(res) {
         var code = res.code;
         wx.request({
-          url: 'http://dev.mylwx.cn:9999/cxm/user/query',
+          url: 'https://dev.mylwx.cn:9999/cxm/user/query',
           data: {
             js_code: res.code,
             grant_type: "authorization_code"

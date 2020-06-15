@@ -1,5 +1,7 @@
 {
   "pages":[
+    "pages/examIndex/examIndex",
+    "pages/subjectInfo/subjectInfo",
     "pages/loginIndex/loginIndex",
     "pages/bindSchoolInfo/bindSchoolInfo",
     "pages/index/index",
@@ -8,7 +10,7 @@
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "智能答题",
     "navigationBarTextStyle":"black"
   },
   "style": "v2",

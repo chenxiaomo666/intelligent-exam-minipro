@@ -35,7 +35,7 @@ Page({
       "is_teacher":this.data.userData.isTeacher,
     };
     wx.request({
-      url: 'http://dev.mylwx.cn:9999/cxm/user/add',
+      url: 'https://dev.mylwx.cn:9999/cxm/user/add',
       method:"POST",
       data:data,
       success(res){
