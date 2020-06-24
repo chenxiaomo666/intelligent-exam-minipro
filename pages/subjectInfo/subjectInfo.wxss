@@ -12,3 +12,10 @@
   margin-bottom: 30px;
 }
 
+.buttonStyle{
+  /* width: 35%;  */
+  margin-top: 35px; 
+  margin-left:10px;
+  float:left;
+}
+

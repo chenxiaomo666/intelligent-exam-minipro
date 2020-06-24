@@ -1,28 +1,34 @@
 <!--pages/subjectInfo/subjectInfo.wxml-->
-<view class="head">{{ userInfo.name }}同学正在答题</view>
+<view class="head">{{ userInfo.true_name }}同学正在答题</view>
 
 <block wx:if="{{isOver==true}}">
-  <view style="margin-top: 50px;">您已完成全部题目，请提交试卷并查看结果分析</view>
-  <button style="margin-top: 50px;" bindtap="submitExam">提交试卷</button>
+  <view style="margin-top: 50px; margin-bottom: 50px;">您已完成全部题目，请提交试卷并查看结果分析</view>
+  <button class="buttonStyle" bindtap="submitExam">提交试卷</button>
 </block>
 <block wx:else>
   <view class="textType">{{subjectInfo.content}}</view>
   <!-- subject_type: 0单项选择，1多项选择 -->
   <block wx:if="{{subjectInfo.subject_type==0}}">
-    <radio-group bindchange="radioChange">
+    <radio-group bindchange="choiceChange">
       <view wx:for="{{subjectInfo.choice_content}}" wx:key="name">
         <radio style="margin-top: 20px;" value="{{index+1}}" checked='{{index.checked}}'>{{item}}</radio>
       </view>
     </radio-group>
   </block>
   <block wx:elif="{{subjectInfo.subject_type==1}}">
-    <checkbox-group bindchange="checkboxChange">
+    <checkbox-group bindchange="choiceChange">
       <view wx:for="{{subjectInfo.choice_content}}" wx:key="name">
         <checkbox style="margin-top: 20px;" value="{{index+1}}" checked='{{index.checked}}'>{{item}}</checkbox>
       </view>
     </checkbox-group>
   </block>
-  <button bindtap="nextSubject">下一题</button>
+  <block wx:if="{{subjectInfo.index > 1}}">
+    <button class="buttonStyle" bindtap="lastSubject">上一题</button>
+  </block>
+  <block wx:if="{{subjectInfo.index < subjectInfo.subject_number}}">
+    <button class="buttonStyle" bindtap="nextSubject">下一题</button>
+  </block>
+  <button class="buttonStyle" bindtap="submitExam">提交试卷</button>
 </block>
 
 

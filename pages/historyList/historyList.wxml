@@ -1,0 +1,9 @@
+<!--pages/historyList/historyList.wxml-->
+<view class="head">{{userInfo.true_name}}同学历史提交数据</view>
+
+<view wx:for="{{historyInfo}}" wx:key="name">
+  <view id="{{item.history_id}}" bindtap="subjectAnalysis" style="margin-top: 20px;text-decoration:underline;">所作试卷编号：{{item.exam_number}}，总花费时间：{{item.time_spent}}，提交时间：{{item.submit_time}}</view>
+
+</view>
+
+<view style="margin-top:30px; justify-content: center; display: flex;">(点击进入详情页)</view>

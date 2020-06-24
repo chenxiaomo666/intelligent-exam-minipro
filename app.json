@@ -1,10 +1,13 @@
 {
   "pages":[
+    "pages/index/index",
+    "pages/loginIndex/loginIndex",
     "pages/examIndex/examIndex",
     "pages/subjectInfo/subjectInfo",
-    "pages/loginIndex/loginIndex",
+    "pages/subjectAnalysisInfo/subjectAnalysisInfo",
     "pages/bindSchoolInfo/bindSchoolInfo",
-    "pages/index/index",
+    "pages/historyList/historyList",
+    "pages/teacherIndex/teacherIndex",
     "pages/logs/logs"
   ],
   "window":{

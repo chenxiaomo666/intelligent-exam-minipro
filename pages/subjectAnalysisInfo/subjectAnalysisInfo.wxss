@@ -1,0 +1,24 @@
+/* pages/subjectAnalysisInfo/subjectAnalysisInfo.wxss */
+.head {
+  color: black;
+  font-size: 17px;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.returnIndex{
+  position: fixed;
+  width:80px;
+  height:40px;
+  bottom: 30px;
+  right: 20px;
+}
+
+.returnInfo{
+  position: fixed;
+  width:100px;
+  height:40px;
+  bottom: 30px;
+  right: 120px;
+}

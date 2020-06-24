@@ -1,13 +1,8 @@
-<!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+<!--pages/index/index.wxml-->
+<view class="head">行为关联的智能答题系统</view>
+
+<view style="margin-top: 30px; margin-bottom: 30px;">
+  <text>害，其实也没啥智能的，就是分析一下你答题过程的行为，题库选自考研政治选择题，没事可以练习练习</text>
 </view>
+
+<button open-type="getUserInfo" bindgetuserinfo="getUserInfo">进入系统</button>

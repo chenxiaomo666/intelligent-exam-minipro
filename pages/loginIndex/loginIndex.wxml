@@ -2,5 +2,5 @@
 <view class="head">
   <text>选择角色并登录</text>
 </view>
-<button class="teacher" open-type="getUserInfo" bindgetuserinfo="getUserInfo" data-isteacher="1">我是老师</button>
-<button class="student" open-type="getUserInfo" bindgetuserinfo="getUserInfo" data-isteacher="0">我是学生</button>
+<button class="teacher" bindtap="choiceIdentity" data-isteacher="1">我是老师</button>
+<button class="student" bindtap="choiceIdentity" data-isteacher="0">我是学生</button>

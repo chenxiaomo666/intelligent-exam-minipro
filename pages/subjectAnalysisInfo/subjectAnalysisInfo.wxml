@@ -1,0 +1,21 @@
+<!--pages/subjectAnalysisInfo/subjectAnalysisInfo.wxml-->
+<view class="head">{{ userInfo.true_name }}同学所做试卷编号为{{examInfo.exam_number}}的答案分析，共用时{{examInfo.time_spent}}秒，提交时间为{{examInfo.submit_time}}</view>
+
+<block wx:for="{{userAnswerInfo}}" wx:key="name">
+  <view style="margin-top:20px;">{{item.subject_content}}</view>
+  <view style="margin-top:20px;" wx:for="{{item.subject_choice_content}}" wx:key="name" wx:for-item="choice">
+      <view>{{choice}}</view>
+  </view>
+  <view style="margin-top:20px;">{{item.subject_reference_answer}}</view>
+  <view style="margin-top:20px;color:red;">{{userInfo.true_name}}答案：{{item.user_answer}}</view>
+  <view style="margin-top:20px;color:red;">{{userInfo.true_name}}答案变更：{{item.answer_change}}</view>
+  <view style="margin-top:20px;color:red;">{{userInfo.true_name}}该题用时{{item.time_spent}}秒</view>
+</block>
+
+<view bindtap='returnIndex'>
+      <image class="returnIndex" src="http://ch.mylwx.cn/return_index.png"></image>
+</view>
+
+<view bindtap='returnInfo'>
+      <image class="returnInfo" src="http://ch.mylwx.cn/return_info.png"></image>
+</view>

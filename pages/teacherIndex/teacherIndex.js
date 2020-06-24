@@ -1,31 +1,54 @@
-// pages/loginIndex/loginIndex.js
-const app = getApp()
-
+// pages/teacherIndex/teacherIndex.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-   
+
   },
-  choiceIdentity(e) {
-    var isTeacher = e.currentTarget.dataset.isteacher;
-    var userInfoStr = JSON.stringify(this.data.userInfo);
-    var openid = this.data.openid;
+
+  histroySubmit(e){
+    var userId = e.currentTarget.id;
     wx.navigateTo({
-      url: '/pages/bindSchoolInfo/bindSchoolInfo?userInfo='+userInfoStr+'&isTeacher='+isTeacher+'&openid='+openid, // 绑定页面
+      url: '/pages/historyList/historyList?userId='+userId
     })
   },
+
+  changeID(){
+    var that = this;
+    wx.request({
+      url: 'https://dev.mylwx.cn:9999/cxm/changeId',
+      method: "POST",
+      data: {
+        user_id: that.data.userInfo.user_id
+      },
+      success(res){
+        var userInfoStr = JSON.stringify(res.data.user_info);
+        wx.navigateTo({
+            url: '/pages/examIndex/examIndex?userInfo='+userInfoStr, // 进去抽取试卷页面
+          })
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     var userInfo = JSON.parse(options.userInfo);
-    var openid = options.openid
     this.setData({
-      userInfo : userInfo,
-      openid : openid
+      userInfo : userInfo
+    })
+    var that = this;
+    wx.request({
+      url: 'https://dev.mylwx.cn:9999/cxm/student/list',
+      method: "GET",
+      success(res){
+        that.setData({
+          studentList: res.data.student_list
+        })
+      }
     })
   },
 

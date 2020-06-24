@@ -1,0 +1,13 @@
+<!--pages/teacherIndex/teacherIndex.wxml-->
+<view class="head">{{userInfo.true_name}}老师，您好</view>
+<view class="head">点击查看学生答题情况</view>
+
+<view wx:for="{{studentList}}" wx:key="name">
+  <view id="{{item.user_id}}" bindtap="histroySubmit" style="margin-top:20px; margin-left:20px;">
+    <image style="height:40px; width:40px; vertical-align:middle;" src="{{ item.head_img }}"></image>
+    <text>{{ item.true_name }}</text>
+    <text>({{item.school_ID}})</text>
+  </view>
+</view>
+
+<button style="margin-top:20px;" bindtap="changeID">切换学生身份</button>

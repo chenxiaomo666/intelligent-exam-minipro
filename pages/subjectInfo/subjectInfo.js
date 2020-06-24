@@ -9,28 +9,92 @@ Page({
     choiceList : [],
   },
   submitExam(){
+    var examAllTime = (new Date().valueOf() - this.data.examStartTime)/1000;
+    var that = this;
     console.log(this.data.choiceList);
-  },
-  radioChange(e){
-    var curChoiceList = this.data.choiceList;
-    curChoiceList[this.data.subjectInfo.index-1] = e.detail.value;
-    console.log(e.detail.value);
-    this.setData({
-      choiceList : curChoiceList
+    wx.request({
+      url: 'https://dev.mylwx.cn:9999/cxm/subject/submit',
+      method: "POST",
+      data:{
+        user_info : that.data.userInfo,
+        choice_list : that.data.choiceList,
+        exam_number : that.data.subjectInfo.exam_number,
+        time_spent : examAllTime,
+      },
+      success(res){
+        console.log(res.data);
+        if(res.data.code==200){
+          wx.showToast({
+            title: '提交成功',
+            icon: "success",   //success,loading,none
+            duration: 2000,
+          });
+          wx.navigateTo({
+            url: '/pages/subjectAnalysisInfo/subjectAnalysisInfo?historyId='+res.data.history_id
+          });
+        }
+        else{
+
+        }
+      },
     })
   },
-  checkboxChange(e){
-    var curChoiceList = this.data.choiceList;
-    curChoiceList[this.data.subjectInfo.index-1] = e.detail.value;
+  choiceChange(e){
+    var index = this.data.subjectInfo.index;
+    var item = this.data.choiceList[index-1];
+    var key = 'choiceList['+index-1+']';
+    var answerChange = this.data.choiceList[index-1].answerChange;
+    console.log(this.data.choiceList[index-1]); // 
+    answerChange.push(e.detail.value)
+    item.userAnswer = e.detail.value;
+    item.timeSpent = this.data.choiceList[index-1].timeSpent + (new Date()).valueOf() - this.data.choiceList[index-1].timeSpentStart;
+    item.answerChange = answerChange
     console.log(e.detail.value);
     this.setData({
-      choiceList : curChoiceList
+      key : item
+    })
+  },
+  lastSubject(){
+    var that = this;
+    wx.request({
+      url: 'https://dev.mylwx.cn:9999/cxm/subject/get',
+      method: "GET",
+      data: {
+        subject_index : that.data.subjectInfo.index - 1,
+        exam_number : that.data.subjectInfo.exam_number
+      },
+      success(res){
+        console.log(res.data);
+        if(res.data.status=="error"){
+          that.setData({
+            isOver : true,
+          })
+        }
+        else{
+          var index = res.data.result.index;
+          var item = that.data.choiceList[index-1];
+          item.subjectIndex = index;
+          item.subjectContent = res.data.result.content;
+          item.subjectChoice = res.data.result.choice_content;
+          item.subjectAnswer = res.data.result.reference_answer;
+          item.subjectType = res.data.result.subject_type;
+          item.timeSpentStart = (new Date()).valueOf();
+          if(that.data.choiceList[index-1].answerChange == null){
+            item.answerChange = []
+          }
+          var key = 'choiceList['+index-1+']';
+          that.setData({
+            subjectInfo : res.data.result,
+            key : item
+          })
+        }
+      },
     })
   },
   nextSubject(){
     var that = this;
     wx.request({
-      url: 'http://dev.mylwx.cn:9999/cxm/subject/get',
+      url: 'https://dev.mylwx.cn:9999/cxm/subject/get',
       method: "GET",
       data: {
         subject_index : that.data.subjectInfo.index + 1,
@@ -42,10 +106,24 @@ Page({
           that.setData({
             isOver : true,
           })
-        };
-        that.setData({
-          subjectInfo : res.data.result,
-        })
+        }else{
+          var index = res.data.result.index;
+          var item = that.data.choiceList[index-1];
+          item.subjectIndex = index;
+          item.subjectContent = res.data.result.content;
+          item.subjectChoice = res.data.result.choice_content;
+          item.subjectAnswer = res.data.result.reference_answer;
+          item.subjectType = res.data.result.subject_type;
+          item.timeSpentStart = (new Date()).valueOf();
+          if(that.data.choiceList[index-1].answerChange == null){
+            item.answerChange = []
+          }
+          var key = 'choiceList['+index-1+']';
+          that.setData({
+            subjectInfo : res.data.result,
+            key : item
+          })
+        }
       },
     })
   },
@@ -54,19 +132,40 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var examStartTime = new Date().valueOf();
     var userInfo = JSON.parse(options.userInfo);
     var subjectInfo = JSON.parse(options.subjectInfo);
-    
-    var choiceList = [];
+    var choiceList = [{
+      subjectIndex : subjectInfo.index,
+      subjectContent : subjectInfo.content,
+      subjectChoice : subjectInfo.choice_content,
+      subjectAnswer : subjectInfo.reference_answer,
+      subjectType : subjectInfo.subject_type,
+      userAnswer : null,
+      timeSpentStart : (new Date()).valueOf(),
+      timeSpent : 0,
+      answerChange : []
+    }];
     var i = 0;
-    for(i; i<subjectInfo.subject_number; i++){
-      choiceList.push(null);
+    for(i+1; i<subjectInfo.subject_number; i++){
+      choiceList.push({
+        subjectIndex : null,
+        subjectContent : null,
+        subjectChoice : null,
+        subjectAnswer : null,
+        subjectType : null,
+        userAnswer : null,
+        timeSpentStart : null,
+        timeSpent : 0,
+        answerChange : null
+      });
     };
     console.log(choiceList);
     this.setData({
       userInfo : userInfo,
       subjectInfo : subjectInfo,
-      choiceList : choiceList
+      choiceList : choiceList,
+      examStartTime : examStartTime,
     });
   },
 

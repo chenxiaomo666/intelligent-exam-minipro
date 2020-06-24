@@ -1,7 +1,7 @@
 <!--pages/examIndex/examIndex.wxml-->
-<view class="head">欢迎{{ name }}同学</view>
+<view class="head">欢迎{{ userInfo.true_name }}同学</view>
 
-<view decode class="textType"><rich-text>一些题目说明:balabalabalabala</rich-text></view>
+<view decode class="textType"><rich-text>一些题目说明:所选题目全部为考研政治选择题，1-16题为单项选择，每题一分，17-33为多项选择，每题两分</rich-text></view>
 <block wx:if="{{examNumber==null}}">
   <view decode class="textType"><rich-text>请点击下方的抽取试卷按钮，并约两秒后进入考试</rich-text></view>
 </block>
@@ -10,3 +10,7 @@
 </block>
 
 <button style="margin-top:30px;" bindtap="startExam">抽取试卷</button>
+
+<button style="margin-top:30px;" bindtap="histroySubmit">历史成绩</button>
+
+<button style="margin-top:30px;" bindtap="changeID">切换教师身份</button>

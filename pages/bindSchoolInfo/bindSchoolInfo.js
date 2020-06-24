@@ -23,36 +23,68 @@ Page({
     })
   },
   submit() {
-    //console.log(this.data.trueName, this.data.schoolID, this.data.schoolName)
-    var data = {
-      "true_name":this.data.trueName,
-      "openid":this.data.userData.openid,
-      "nickname":this.data.userData.userInfo.nickName,
-      "head_img":this.data.userData.userInfo.avatarUrl,
-      "sex":this.data.userData.userInfo.gender,
-      "school_ID":this.data.schoolID,
-      "school_name":this.data.schoolName,
-      "is_teacher":this.data.userData.isTeacher,
-    };
-    wx.request({
-      url: 'https://dev.mylwx.cn:9999/cxm/user/add',
-      method:"POST",
-      data:data,
-      success(res){
-        console.log(res.data)
-      }
+    var that = this;
+    if(that.data.trueName == null){
+      wx.showToast({
+      title: '姓名未填写！',
+      icon: "none",   //success,loading,none
+      duration: 2000,
     })
+    }else if(that.data.schoolName == null){
+      wx.showToast({
+        title: '校名未填写！',
+        icon: "none",   //success,loading,none
+        duration: 2000,
+      })
+    }else if(that.data.schoolID == null){
+      wx.showToast({
+        title: 'ID未填写！',
+        icon: "none",   //success,loading,none
+        duration: 2000,
+      })
+    }else{
+      wx.request({
+        url: 'https://dev.mylwx.cn:9999/cxm/user/add',
+        method:"POST",
+        data: {
+          true_name: that.data.trueName,
+          openid: that.data.openid,
+          nickname: that.data.userInfo.nickName,
+          head_img: that.data.userInfo.avatarUrl,
+          sex: that.data.userInfo.gender,
+          school_ID: that.data.schoolID,
+          school_name: that.data.schoolName,
+          is_teacher: that.data.isTeacher,
+          },
+        success(res){
+          console.log(res.data)
+          var userInfoStr = JSON.stringify(res.data.user_info);
+          if(res.data.user_info.is_teacher){
+            wx.navigateTo({
+              url: '/pages/teacherIndex/teacherIndex'
+            })
+          }
+          else{
+            wx.navigateTo({
+              url: '/pages/examIndex/examIndex?userInfo='+userInfoStr, // 进去抽取试卷页面
+            })
+          } 
+        }
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var userData = JSON.parse(options.userData);
+    var userInfo = JSON.parse(options.userInfo);
+    var isTeacher = options.isTeacher;
+    var openid = options.openid;
     this.setData({
-      userData: userData,
+      userInfo : userInfo,
+      isTeacher: isTeacher,
+      openid : openid,
     });
-    console.log(this.data.userData);
-    // console.log(this.data.isTeacher, typeof(this.data.isTeacher));
   },
 
   /**

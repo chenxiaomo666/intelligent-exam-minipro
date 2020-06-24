@@ -5,19 +5,19 @@
 
 <view class="body">
   <view class="preInputText"> 
-    真实姓名：<input placeholder="陈小陌" class="inputType" bindinput="trueNameInput"></input>
+    真实姓名：<input placeholder="例如：陈小陌" class="inputType" bindinput="trueNameInput"></input>
   </view>
   <view class="preInputText"> 
-    学校名称：<input placeholder="东北大学秦皇岛分校" class="inputType" bindinput="schoolNameInput"></input>
+    学校名称：<input placeholder="例如：东北大学秦皇岛分校" class="inputType" bindinput="schoolNameInput"></input>
   </view>
   <block wx:if="{{userData.isTeacher=='1'}}">
     <view class="preInputText">
-      " "教工号：<input placeholder="20178666" class="inputType" bindinput="schoolIDInput"></input>
+      " "教工号：<input placeholder="例如：20178666" class="inputType" bindinput="schoolIDInput"></input>
     </view>
   </block>
   <block wx:else>
     <view class="preInputText">
-      学号：<input placeholder="20178666" class="inputType" bindinput="schoolIDInput"></input>
+      学号：<input placeholder="例如：20178666" class="inputType" bindinput="schoolIDInput"></input>
     </view>
   </block>
   <button bindtap="submit">提交</button>

@@ -1,31 +1,40 @@
-// pages/loginIndex/loginIndex.js
-const app = getApp()
-
+// pages/historyList/historyList.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-   
+
   },
-  choiceIdentity(e) {
-    var isTeacher = e.currentTarget.dataset.isteacher;
-    var userInfoStr = JSON.stringify(this.data.userInfo);
-    var openid = this.data.openid;
+
+  subjectAnalysis(e){
+    var historyId = e.currentTarget.id;
     wx.navigateTo({
-      url: '/pages/bindSchoolInfo/bindSchoolInfo?userInfo='+userInfoStr+'&isTeacher='+isTeacher+'&openid='+openid, // 绑定页面
-    })
+      url: '/pages/subjectAnalysisInfo/subjectAnalysisInfo?historyId='+historyId
+    });
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var userInfo = JSON.parse(options.userInfo);
-    var openid = options.openid
-    this.setData({
-      userInfo : userInfo,
-      openid : openid
+    var that = this;
+    var userId = options.userId;
+    console.log(userId);
+    wx.request({
+      url: 'https://dev.mylwx.cn:9999/cxm/exam/history',
+      data: {
+        user_id: userId
+      },
+      method: "GET",
+      success(res){
+        console.log(res.data);
+        that.setData({
+          userInfo : res.data.user_info,
+          historyInfo : res.data.history_info
+        })
+      }
     })
   },
 
