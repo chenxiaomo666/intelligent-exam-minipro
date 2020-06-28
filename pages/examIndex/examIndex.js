@@ -57,7 +57,7 @@ Page({
   changeID(){
     var that = this;
     wx.request({
-      url: 'https://dev.mylwx.cn:9999/cxm/changeId',
+      url: 'https://dev.mylwx.cn:9999/cxm/change/teacher',
       method: "POST",
       data: {
         user_id: that.data.userInfo.user_id

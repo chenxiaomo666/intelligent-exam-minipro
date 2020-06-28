@@ -33,8 +33,7 @@ Page({
                 wx.navigateTo({
                     url: '/pages/examIndex/examIndex?userInfo='+userInfoStr, // 进去抽取试卷页面
                   })
-              }
-              else{
+              }else{
                 var userInfoStr = JSON.stringify(res.data.user_info);
                 wx.navigateTo({
                   url: '/pages/teacherIndex/teacherIndex?userInfo='+userInfoStr
