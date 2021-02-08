@@ -16,17 +16,76 @@ Page({
   data: {
     examNumber : null,
     subjectNumber : null,
+    findExam : false
   },
+
+  examYearInput(e) {
+    this.setData({
+      examNumber: e.detail.value
+    })
+  },
+
+  getYearExam(){
+    var that = this;
+    if(that.data.examNumber == null){
+      wx.showToast({
+      title: '年份未输入！',
+      icon: "none",   //success,loading,none
+      duration: 2000,
+    })
+    }else{
+    wx.request({
+      url: 'https://dev.mylwx.cn:9990/cxm/subject/get',
+       data: {
+         "exam_number": that.data.examNumber
+       },
+      method: "GET",
+      success(res) {
+        console.log(res.data);
+        var exam_number = 0;
+        if(res.data.status=="error"){
+          wx.showToast({
+            title: '俺找不到！',
+            icon: "none",   //success,loading,none
+            duration: 2000,
+          })
+        }else{
+        if(res.data.result.exam_number != null){
+          exam_number = res.data.result.exam_number;
+        }
+        that.setData({
+          findExam : true,
+          examNumber : exam_number,
+          subjectNumber : res.data.result.subject_number,
+          subjectInfo : res.data.result
+        });
+        setTimeout(function(){
+          var userInfo = that.data.userInfo;
+          var subjectInfo = that.data.subjectInfo;
+          var userInfoStr = JSON.stringify(userInfo);
+          var subjectInfoStr = JSON.stringify(subjectInfo);
+
+          wx.navigateTo({
+            url: '/pages/subjectInfo/subjectInfo?userInfo='+userInfoStr+'&subjectInfo='+subjectInfoStr, // 绑定页面
+          });
+        }, 2000);
+    }
+  }
+  });
+  }
+  },
+
   histroySubmit(){
     var that = this;
     wx.navigateTo({
       url: '/pages/historyList/historyList?userId='+that.data.userInfo.user_id
     })
   },
+
   startExam(){
     var that = this;
     wx.request({
-      url: 'https://dev.mylwx.cn:9999/cxm/subject/get',
+      url: 'https://dev.mylwx.cn:9990/cxm/subject/get',
       // data: {},
       method: "GET",
       success(res) {
@@ -36,6 +95,7 @@ Page({
           exam_number = res.data.result.exam_number;
         }
         that.setData({
+          findExam : true,
           examNumber : exam_number,
           subjectNumber : res.data.result.subject_number,
           subjectInfo : res.data.result
@@ -57,7 +117,7 @@ Page({
   changeID(){
     var that = this;
     wx.request({
-      url: 'https://dev.mylwx.cn:9999/cxm/change/teacher',
+      url: 'https://dev.mylwx.cn:9990/cxm/change/teacher',
       method: "POST",
       data: {
         user_id: that.data.userInfo.user_id

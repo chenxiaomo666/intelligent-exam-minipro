@@ -44,7 +44,7 @@ Page({
       })
     }else{
       wx.request({
-        url: 'https://dev.mylwx.cn:9999/cxm/user/add',
+        url: 'https://dev.mylwx.cn:9990/cxm/user/add',
         method:"POST",
         data: {
           true_name: that.data.trueName,

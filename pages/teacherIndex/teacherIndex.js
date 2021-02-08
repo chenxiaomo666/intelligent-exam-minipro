@@ -18,7 +18,7 @@ Page({
   changeID(){
     var that = this;
     wx.request({
-      url: 'https://dev.mylwx.cn:9999/cxm/change/student',
+      url: 'https://dev.mylwx.cn:9990/cxm/change/student',
       method: "POST",
       data: {
         user_id: that.data.userInfo.user_id
@@ -42,7 +42,7 @@ Page({
     })
     var that = this;
     wx.request({
-      url: 'https://dev.mylwx.cn:9999/cxm/student/list',
+      url: 'https://dev.mylwx.cn:9990/cxm/student/list',
       method: "GET",
       success(res){
         that.setData({

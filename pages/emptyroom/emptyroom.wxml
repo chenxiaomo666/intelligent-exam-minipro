@@ -1,0 +1,45 @@
+<view style="margin-bottom: 15px;">{{time}}     星期{{weekday}} </view>
+
+<block wx:if="{{is_first==true}}">
+    <view style="margin-bottom: 15px;">
+      您是今天第1位到访者，您的点击为后面的同学提供了数据，感谢您！
+    </view>
+</block>
+
+<block wx:else>
+    <view style="margin-bottom: 15px;">
+      您是今天第{{frequency}}位到访者，祝您学习愉快！
+    </view>
+</block>
+
+<view style="margin-bottom: 15px;">距离考研还有{{countdown}}天！加油！</view>
+
+<view style="margin-bottom: 15px;">全天都空闲</view>
+<view style="margin-bottom: 15px;">{{all}}</view>
+
+<view style="margin-bottom: 15px;">一上午都空闲</view>
+<view style="margin-bottom: 15px;">{{morning}}</view>
+
+<view style="margin-bottom: 15px;">一下午都空闲</view>
+<view style="margin-bottom: 15px;">{{afternoon}}</view>
+
+<view style="margin-bottom: 15px;">一晚上都空闲</view>
+<view style="margin-bottom: 15px;">{{evening}}</view>
+
+<view style="margin-bottom: 15px;">一二节无课</view>
+<view style="margin-bottom: 15px;">{{one_two}}</view>
+
+<view style="margin-bottom: 15px;">三四节无课</view>
+<view style="margin-bottom: 15px;">{{three_four}}</view>
+
+<view style="margin-bottom: 15px;">五六节无课</view>
+<view style="margin-bottom: 15px;">{{five_six}}</view>
+
+<view style="margin-bottom: 15px;">七八节无课</view>
+<view style="margin-bottom: 15px;">{{seven_eight}}</view>
+
+<view style="margin-bottom: 15px;">九十节无课</view>
+<view style="margin-bottom: 15px;">{{nine_ten}}</view>
+
+<view style="margin-bottom: 15px;">如有数据不显示情况，应该是后台崩了，建议用网页版，数据错误请联系qq:1315203091</view>
+<view>数据来源于教务处 powered by 帅气的陈小陌</view>

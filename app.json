@@ -8,6 +8,7 @@
     "pages/bindSchoolInfo/bindSchoolInfo",
     "pages/historyList/historyList",
     "pages/teacherIndex/teacherIndex",
+    "pages/emptyroom/emptyroom",
     "pages/logs/logs"
   ],
   "window":{

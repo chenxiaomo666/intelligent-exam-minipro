@@ -1,8 +1,10 @@
 <!--pages/index/index.wxml-->
-<view class="head">行为关联的智能答题系统</view>
+<view class="head">自强不息，知行合一</view>
 
-<view style="margin-top: 30px; margin-bottom: 30px;">
-  <text>害，其实也没啥智能的，就是分析一下你答题过程的行为，题库选自考研政治选择题，没事可以练习练习</text>
+<view style="margin-top: 30px; margin-bottom: 30px; margin-left: 20px">
+  <text>空教室查询，和政治选择题练习</text>
 </view>
 
-<button open-type="getUserInfo" bindgetuserinfo="getUserInfo">进入系统</button>
+<button style="margin-top: 30px; margin-bottom: 30px;" bindtap="emptyRoom">空教室查询</button>
+
+<button open-type="getUserInfo" bindgetuserinfo="getUserInfo">练习选择题</button>

@@ -11,3 +11,13 @@
   margin-top: 50px;
   margin-left: 20px;
 }
+
+.inputType{
+  border: 1px solid black;
+  /* margin-bottom: 30px; */
+  font-size: 12px;
+}
+
+.preInputText{
+  display: flex;
+}

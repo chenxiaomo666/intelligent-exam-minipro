@@ -29,7 +29,7 @@ Page({
   onLoad: function (options) {
     var that = this;
     wx.request({
-      url: 'https://dev.mylwx.cn:9999/cxm/subject/analysis',
+      url: 'https://dev.mylwx.cn:9990/cxm/subject/analysis',
       method: "GET",
       data : {
         history_id : options.historyId

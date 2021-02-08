@@ -1,38 +1,38 @@
-// pages/historyList/historyList.js
+// pages/emptyroom/emptyroom.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
-  },
-
-  subjectAnalysis(e){
-    var historyId = e.currentTarget.id;
-    wx.navigateTo({
-      url: '/pages/subjectAnalysisInfo/subjectAnalysisInfo?historyId='+historyId
-    });
+      
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this;
-    var userId = options.userId;
-    console.log(userId);
+    var that=this;
     wx.request({
-      url: 'https://dev.mylwx.cn:9990/cxm/exam/history',
-      data: {
-        user_id: userId
-      },
+      url: 'https://dev.mylwx.cn:9990/cxm/emptyroom',
       method: "GET",
       success(res){
-        console.log(res.data);
+        console.log(res);
         that.setData({
-          userInfo : res.data.user_info,
-          historyInfo : res.data.history_info
+          weekday: res.data.result.weekday,
+          time: res.data.result.time,
+          all : res.data.result.all,
+          morning:  res.data.result.morning,
+          afternoon:  res.data.result.afternoon,
+          evening: res.data.result.evening,
+          one_two: res.data.result.one_two,
+          three_four : res.data.result.three_four,
+          five_six:  res.data.result.five_six,
+          seven_eight:  res.data.result.seven_eight,
+          nine_ten: res.data.result.nine_ten,
+          is_first: res.data.result.is_first,
+          frequency: res.data.result.frequency,
+          countdown: res.data.result.countdown
         })
       }
     })

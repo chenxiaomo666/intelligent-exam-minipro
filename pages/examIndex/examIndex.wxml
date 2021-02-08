@@ -1,15 +1,21 @@
 <!--pages/examIndex/examIndex.wxml-->
 <view class="head">欢迎{{ userInfo.true_name }}同学</view>
 
-<view decode class="textType"><rich-text>一些题目说明:所选题目全部为考研政治选择题，1-16题为单项选择，每题一分，17-33为多项选择，每题两分</rich-text></view>
-<block wx:if="{{examNumber==null}}">
-  <view decode class="textType"><rich-text>请点击下方的抽取试卷按钮，并约两秒后进入考试</rich-text></view>
+<view decode class="textType"><rich-text>包含2010-2021年考研政治选择题真题，1-16题为单项选择，每题一分，17-33为多项选择，每题两分</rich-text></view>
+<block wx:if="{{findExam==false}}">
+  <view decode class="textType"><rich-text>请抽取试卷或者输入年份（纯数字）选取试卷，并约两秒后进入考试</rich-text></view>
 </block>
 <block wx:else>
-  <view decode class="textType"><rich-text>您抽取的试卷编号为{{examNumber}}，一共有{{subjectNumber}}道题目，两秒后进入考试</rich-text></view>
+  <view decode class="textType"><rich-text>您选择的试卷编号为{{examNumber}}，一共有{{subjectNumber}}道题目，两秒后进入考试</rich-text></view>
 </block>
 
-<button style="margin-top:30px;" bindtap="startExam">抽取试卷</button>
+<button style="margin-top:30px;" bindtap="startExam">随机来一套</button>
+
+<view style="margin-top:30px; margin-left:20px;" class="preInputText"> 
+      输入年份：<input placeholder="例如：2021" class="inputType" bindinput="examYearInput"></input>
+</view>
+
+<button style="margin-top:30px;" bindtap="getYearExam">获取试卷</button>
 
 <button style="margin-top:30px;" bindtap="histroySubmit">历史成绩</button>
 

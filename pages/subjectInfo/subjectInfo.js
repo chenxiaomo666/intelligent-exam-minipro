@@ -13,7 +13,7 @@ Page({
     var that = this;
     console.log(this.data.choiceList);
     wx.request({
-      url: 'https://dev.mylwx.cn:9999/cxm/subject/submit',
+      url: 'https://dev.mylwx.cn:9990/cxm/subject/submit',
       method: "POST",
       data:{
         user_info : that.data.userInfo,
@@ -57,7 +57,7 @@ Page({
   lastSubject(){
     var that = this;
     wx.request({
-      url: 'https://dev.mylwx.cn:9999/cxm/subject/get',
+      url: 'https://dev.mylwx.cn:9990/cxm/subject/get',
       method: "GET",
       data: {
         subject_index : that.data.subjectInfo.index - 1,
@@ -94,7 +94,7 @@ Page({
   nextSubject(){
     var that = this;
     wx.request({
-      url: 'https://dev.mylwx.cn:9999/cxm/subject/get',
+      url: 'https://dev.mylwx.cn:9990/cxm/subject/get',
       method: "GET",
       data: {
         subject_index : that.data.subjectInfo.index + 1,
